@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>fullPage - Demo</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description"
+        content="fullPage:For desktop(ie5.5+) or mobile webApp without jQuery,create full screen pages fast and simple.">
+    <meta name="keywords" content="fullPage,webApp,full screen">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <style>
+        .page1,
+        .page4 {
+            background: url('./static/images/bj2.jpg')
+        }
+
+        .page2 {
+            background: url('./static/images/yb.jpg') no-repeat;
+            background-size: 100% 100%;
+        }
+
+        h3,
+        h4,
+        .contain p {
+            color: #edb3b2 !important;
+        }
+
+        .page3 {
+            background-color: #000;
+        }
+
+        .p1 {
+            font-size: 30px;
+            text-align: center;
+        }
+        .disno{
+            display: none
+        }
+        .tips{
+            position:fixed;
+            top: 0;
+            background-color: rgba(0,0,0, .8);
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<!--[if lte IE 7]>      
+<body scroll="no"> 
+<![endif]-->
+<!--[if gt IE 7]><!-->
+
+<body>
+        <div class="tips disno" id="tips">
+                <img src="./static/tips.png" alt="">
+            </div>
+            <audio autoplay>
+                    <source src="./static/豆豆 - A Little Love.mp3" type="audio/ogg">
+                </audio>
+    <!--<![endif]-->
+    <div id="article">
+        <div class="page section1 current">
+            <div class="contain">
+                <div id="pageContain">
+                    <div class="page page1 current">
+                        <div class="contain">
+                            <h3 class="title">这是我们一起过的</h3>
+                            <h4 class="titleEng">第一个七夕</h4>
+                            <img src="static/images/qs.jpg" alt="HTML,CSS" class="page1-box">
+                            <p>嘿嘿</p>
+                        </div>
+                    </div>
+                    <div class="page page2">
+                        <div class="contain">
+                            <h3 class="title">特别的日子</h3>
+                            <h4 class="titleEng">给特别的你</h4>
+                            <!-- <img src="static/picture/yb.jpg" alt="可视化数据" class="page2-box"> -->
+                        </div>
+                    </div>
+                    <div class="page page3">
+                        <div class="contain">
+                            <h3 class="title">遇到你之后</h3>
+                            <h4 class="titleEng">我就不想再遇别人</h4>
+                            <img src="static/images/che.jpg" alt="影视制作" class="page3-box">
+                        </div>
+                        <div class="scTop"></div>
+                        <div class="scBottom"></div>
+                    </div>
+                    <div class="page page4">
+                        <div class="contain">
+                            <p class="p1">所有的生活里</br>所有的惊喜里</br>我最喜欢你。</br>生活归生活，</br>理想归理想，</br>现实归现实,</br>你归我</p>
+                            <!-- <h4 class="titleEng">Touch it!</h4> -->
+
+                        </div>
+                    </div>
+                </div>
+
+               
+                <ul id="navBar">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <div id="prev">&lt;</div>
+                <div id="next">&gt;</div>
+            </div>
+        </div>
+        <div class="page section2">
+            <div class="contain">
+                <h3 class="title">这里是第二竖屏</h3>
+                <h4 class="titleEng">This is section2</h4>
+            </div>
+        </div>
+        <div class="page section3">
+            <div class="contain">
+                <h3 class="title">这里是第三竖屏</h3>
+                <h4 class="titleEng">This is section3</h4>
+            </div>
+        </div>
+        <div class="page section4">
+            <div class="contain">
+                <h3 class="title">这里是第四竖屏</h3>
+                <h4 class="titleEng">This is section4</h4>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/js/fullpage.min.js"></script>
+    <script type="text/javascript">
+ //判断浏览器
+ var browser = {
+        versions: function () {
+            var u = navigator.userAgent,
+                app = navigator.appVersion;
+            return { //移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器
+                iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                YiXin: u.indexOf('YiXin') > -1, //是否YiXin手机开户
+                weixin: u.toLowerCase().indexOf("micromessenger") > -1
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+    if (browser.versions.android && browser.versions.weixin) { //是否微信浏览器
+        document.getElementById("tips").classList.remove("disno");
+    }
+
+        var runPage,
+            runPage2,
+            interval,
+            autoPlay;
+
+        autoPlay = function (to) {
+
+            clearTimeout(interval);
+            interval = setTimeout(function () {
+                runPage.go(to);
+            }, 7000);
+
+        }
+
+        runPage = new FullPage({
+
+            id: 'pageContain', // id of contain
+            slideTime: 1000, // time of slide
+            effect: { // slide effect
+                transform: {
+                    translate: 'X', // 'X'|'Y'|'XY'|'none'
+                    scale: [0, 1], // [scalefrom, scaleto]
+                    rotate: [60, 0] // [rotatefrom, rotateto]
+                },
+                opacity: [0, 1] // [opacityfrom, opacityto]
+            },
+            mode: 'touch,nav:navBar', // mode of fullpage
+            easing: [0, .93, .39,
+            .98], // easing('ease','ease-in','ease-in-out' or use cubic-bezier like [.33, 1.81, 1, 1] )
+            callback: function (index, thisPage) { // callback when pageChange
+
+                index = index + 1 > 3 ? 0 : index + 1;
+                autoPlay(index);
+            }
+        });
+
+        // runSection = new FullPage({
+
+        //     id: 'article', // id of contain
+        //     slideTime: 800, // time of slide
+        //     effect: { // slide effect
+        //         transform: {
+        //             translate: 'Y', // 'X'|'Y'|'XY'|'none'
+        //             scale: [0, 1], // [scalefrom, scaleto]
+        //             rotate: [0, 0] // [rotatefrom, rotateto]
+        //         },
+        //         opacity: [0, 1] // [opacityfrom, opacityto]
+        //     },
+        //     mode: 'touch,wheel', // mode of fullpage
+        //     easing: [0, .93, .39, .98],
+        //     callback: function (index, thisPage) { // callback when pageChange
+
+        //         if (index === 0) {
+        //             autoPlay(runPage.thisPage() + 1);
+        //         } else {
+        //             clearTimeout(interval);
+        //         }
+        //     }
+        // });
+
+        interval = setTimeout(function () {
+            runPage.go(runPage.thisPage() + 1);
+        }, 5000);
+    </script>
+    <script type="text/javascript">
+        var prev = document.getElementById('prev'),
+            next = document.getElementById('next');
+
+        prev.onclick = function () {
+            runPage.go(runPage.thisPage() - 1);
+        }
+        next.onclick = function () {
+            runPage.go(runPage.thisPage() + 1);
+        }
+    </script>
+    <!--[if lte IE 6]>
+	<script type="text/javascript" src="static/js/dd_belatedpng_0.0.8a.js" charset="utf-8"></script>
+	<script type="text/javascript">
+	DD_belatedPNG.fix("*");
+	</script>
+	<![endif]-->
+</body>
+
+</html>
